@@ -3,31 +3,26 @@ import './App.css';
 
 interface ISquareProps {
   value: string,
+  onClick: (i: number) => any,
+  cell: number,
 }
 
-interface ISquareStatus {
-  value: string,
-}
-
-class Square extends React.Component<ISquareProps, ISquareStatus> {
+class Square extends React.Component<ISquareProps> {
 
   constructor(props: ISquareProps) {
     super(props);
-    this.state = {
-      value: props.value,
-    }
   }
 
   public render() {
     return (
-      <button className="square" onClick={this.markCell}>
-        {this.state.value}
+      <button className="square" onClick={this.onClick}>
+        {this.props.value}
       </button>
     );
   }
 
-  private markCell = () => {
-    this.setState({ value: 'X' });
+  private onClick = () => {
+    this.props.onClick(this.props.cell);
   }
 }
 
