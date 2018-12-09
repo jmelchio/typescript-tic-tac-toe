@@ -3,8 +3,8 @@ import './App.css';
 
 interface ISquareProps {
   value: string,
-  onClick: (i: number) => any,
-  cell: number,
+  onClick: (event: any) => void,
+  cell: string,
 }
 
 class Square extends React.Component<ISquareProps> {
@@ -15,14 +15,10 @@ class Square extends React.Component<ISquareProps> {
 
   public render() {
     return (
-      <button className="square" onClick={this.onClick}>
+      <button className="square" onClick={this.props.onClick} id={this.props.cell}>
         {this.props.value}
       </button>
     );
-  }
-
-  private onClick = () => {
-    this.props.onClick(this.props.cell);
   }
 }
 

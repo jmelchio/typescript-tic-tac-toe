@@ -43,13 +43,13 @@ class Board extends React.Component<IBoardProps, IBoardState> {
     );
   }
 
-  private renderSquare(i: number) {
-    return <Square value={this.state.squares[i]} onClick={this.markCell} cell={i}/>;
+  private renderSquare = (i: number): JSX.Element => {
+    return <Square value={this.state.squares[i]} onClick={this.markCell} cell={i.toString()}/>;
   }
 
-  private markCell(i: number): any {
+  private markCell = (event: any): void => {
     const squares = this.state.squares.slice();
-    squares[i] = 'X';
+    squares[Number(event.target.id)] = 'X';
     this.setState({ squares });
   }
 }
