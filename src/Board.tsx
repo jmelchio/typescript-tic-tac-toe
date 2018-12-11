@@ -8,6 +8,7 @@ interface IBoardProps {
 
 interface IBoardState {
   squares: string[],
+  symbol: string,
 }
 
 class Board extends React.Component<IBoardProps, IBoardState> {
@@ -15,11 +16,12 @@ class Board extends React.Component<IBoardProps, IBoardState> {
     super(props);
     this.state = {
       squares: new Array(9),
+      symbol: 'X'
     };
   }
 
   public render() {
-    const status = 'Next player: X';
+    const status = 'Next player: ' + this.state.symbol;
 
     return (
       <div>
@@ -45,13 +47,14 @@ class Board extends React.Component<IBoardProps, IBoardState> {
 
   private renderSquare = (i: number): JSX.Element => {
     return <Square value={this.state.squares[i]} onClick={this.markCell} cell={i.toString()}/>;
-  }
+  };
 
   private markCell = (event: any): void => {
     const squares = this.state.squares.slice();
-    squares[Number(event.target.id)] = 'X';
+    squares[Number(event.target.id)] = this.state.symbol;
     this.setState({ squares });
-  }
+    this.setState({ symbol: this.state.symbol === 'X' ? 'O' : 'X' });
+  };
 }
 
 export default Board;
